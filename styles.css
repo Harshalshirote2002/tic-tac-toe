@@ -25,8 +25,8 @@ header{
 }
 
 main{
-    height: 60vh;
-    width: 40vw;;
+    height: max(60vh, 400px);
+    width: max(40vw, 400px);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -41,14 +41,15 @@ main{
     width: 100%;
     text-align: center;
     align-items: center;
+    font-weight: 900;
 }
 
 .cell:nth-child(3n+2), .cell:nth-child(3n+1){
-    border-right: 4px solid #475569;
+    border-right: 10px solid #475569;
 }
 
 .cell:nth-child(n + 4) {
-    border-top: 4px solid #475569;
+    border-top: 10px solid #475569;
   }
 
 form{
@@ -81,17 +82,32 @@ form button{
     padding: 24px;
 }
 
+#result{
+    font-weight: 800;
+    font-size: 36px;
+    padding: 32px;
+}
+
+#restart{
+    background-color: #0f172a;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
 footer{
     display: flex;
     gap: 7px;
     font-size: 24px;
-    bottom: 4px;
-    position: fixed;
     font-family: 'Gideon Roman', cursive;
+    margin-top: 24px;
 }
 
 .fab{
-    color: black;
+    color: #020617;
     transition: 0.2s ease-in-out;
 }
 

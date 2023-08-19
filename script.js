@@ -3,13 +3,17 @@ const submit = document.getElementById('confirmInfo');
 const form = document.getElementById('info');
 const name1 = document.getElementById('player1');
 const name2 = document.getElementById('player2');
+const result = document.getElementById('result');
+const restart = document.getElementById('restart');
 let player1 = 0;
 let player2 = 0;
 let awaitedPlayer = 0;
+let counter = 0;
+let interrupt = 0;
 
 
 const gameBoard = (function(){
-    const board = {
+    let board = {
         1 : " ",
         2 : " ",
         3 : " ",
@@ -24,16 +28,25 @@ const gameBoard = (function(){
         board[position] = marker;
     };
     let getBoardState = () => Object.assign({}, board);
-    return {modify, getBoardState};
+    let clear = () => {board = 
+    {1 : " ",
+    2 : " ",
+    3 : " ",
+    4 : " ",
+    5 : " ",
+    6 : " ",
+    7 : " ",
+    8 : " ",
+    9 : " "}};
+    return {modify, getBoardState, clear};
 })();
 
 const player = (name, marker)=> {
-    const positions = [];
-    const showPositions = ()=>{console.log(positions)};
-    return {name, marker, showPositions};
+    return {name, marker};
 }
 
 function display(){
+    counter ++;
     let boardState = gameBoard.getBoardState();
     const board = document.querySelector('main');
     board.textContent='';
@@ -45,19 +58,23 @@ function display(){
         cell.addEventListener('click', playerMove)
         board.appendChild(cell);
     }
-    console.log("I am called first!");
+    if(counter===10){
+        result.textContent='Its\'s a tie';
+        interrupt=1;
+    }
 }
 
 function playerMove(e){
     let currentPlayer = awaitedPlayer;
-    console.log(currentPlayer.name);
+    if(interrupt){
+        return;
+    }
     if(e.target.textContent == " "){
-        // e.target.textContent = `${currentPlayer.marker}`; 
         gameBoard.modify(e.target.classList[0] , currentPlayer.marker);
         display();
         awaitedPlayer = (awaitedPlayer==player1? player2: player1);
     }else{
-        alert("Invalid move!");
+        return;
     }
     winCheck(currentPlayer);
 }
@@ -65,29 +82,29 @@ function playerMove(e){
 function winCheck(currentPlayer){
     board = gameBoard.getBoardState();
     if(board[1]==board[2] && board[2]==board[3] && !(board[1]===' ')){
-        alert(`The winner is ${currentPlayer.name}!`);
-        console.log(1);
+        result.textContent = `${currentPlayer.name} wins!`;
+        interrupt = 1;
     }else if(board[4]==board[5] && board[5]==board[6] && !(board[4]===' ')){
-        alert(`The winner is ${currentPlayer.name}!`);
-        console.log(2);
+        result.textContent = `${currentPlayer.name} wins!`;
+        interrupt = 1;
     }else if(board[7]==board[8] && board[8]==board[9] && !(board[7]===' ')){
-        alert(`The winner is ${currentPlayer.name}!`);
-        console.log(3);
+        result.textContent = `${currentPlayer.name} wins!`;
+        interrupt = 1;
     }else if(board[1]==board[4] && board[4]==board[7] && !(board[1]===' ')){
-        alert(`The winner is ${currentPlayer.name}!`);
-        console.log(4);
+        result.textContent = `${currentPlayer.name} wins!`;
+        interrupt = 1;
     }else if(board[2]==board[5] && board[5]==board[8] && !(board[2]===' ')){
-        alert(`The winner is ${currentPlayer.name}!`);
-        console.log(5);
+        result.textContent = `${currentPlayer.name} wins!`;
+        interrupt = 1;
     }else if(board[3]==board[6] && board[6]==board[9] && !(board[3]===' ')){
-        alert(`The winner is ${currentPlayer.name}!`);
-        console.log(6);
+        result.textContent = `${currentPlayer.name} wins!`;
+        interrupt = 1;
     }else if(board[1]==board[5] && board[5]==board[9] && !(board[1]===' ')){
-        alert(`The winner is ${currentPlayer.name}!`);
-        console.log(7);
+        result.textContent = `${currentPlayer.name} wins!`;
+        interrupt = 1;
     }else if(board[3]==board[5] && board[5]==board[7] && !(board[3]===' ')){
-        alert(`The winner is ${currentPlayer.name}!`);
-        console.log(8);
+        result.textContent = `${currentPlayer.name} wins!`;
+        interrupt = 1;
     }
 }
 
@@ -111,6 +128,20 @@ function setup(){
         }
     });
 }
+
+function reset(){
+    player1 = 0;
+    player2 = 0;
+    awaitedPlayer = 0;
+    counter = 0;
+    interrupt = 0;
+    gameBoard.clear();
+    result.textContent='';
+    setup();
+    display();
+}
+
+restart.addEventListener('click', reset);
 
 setup();
 display();
