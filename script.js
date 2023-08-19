@@ -93,6 +93,8 @@ function winCheck(currentPlayer){
 
 function setup(){
     dialog.showModal();
+    let body = document.querySelector('body');
+    body.style = "background-color: black;";
     const dialogHeight = dialog.offsetHeight;
     const dialogWidth = dialog.offsetWidth;
     const windowHeight = window.innerHeight;
@@ -104,6 +106,7 @@ function setup(){
             player1 = player(name1.value, 'X');
             player2 = player(name2.value, 'O');
             awaitedPlayer = player1;
+            body.style = "background-color: #e2e8f0;";
             dialog.close();
         }
     });

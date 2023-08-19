@@ -1,13 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto+Mono:wght@100&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');
+
 *{
     margin: 0;
     padding: 0;
-    /* border: 2px solid red; */
 }
 
 body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #e2e8f0;
+    font-family: 'Roboto Mono', monospace;
 }
 
 header{
@@ -15,6 +20,8 @@ header{
     height: 10vh;
     margin-top: 24px;
     margin-bottom: 54px;
+    font-weight: 700;
+    text-shadow: 2px 3px 8px #0f172a;
 }
 
 main{
@@ -30,29 +37,42 @@ main{
     display:grid; 
     place-self: center; 
     font-size:54px; 
-    height: 90%;
-    width: 90%;
+    height: 100%;
+    width: 100%;
     text-align: center;
     align-items: center;
-    border: 2px solid black;
 }
+
+.cell:nth-child(3n+2), .cell:nth-child(3n+1){
+    border-right: 4px solid #475569;
+}
+
+.cell:nth-child(n + 4) {
+    border-top: 4px solid #475569;
+  }
 
 form{
     display: grid;
     font-size: 24px;
     grid-template-columns: 1fr 1fr;
     margin: 24px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.info{
+    background-color: #f1f5f9;
 }
 
 form button{
     grid-column: 1/3;
     place-self: center;
-    background-color: rgb(0, 217, 255);
+    background-color: #0f172a;
     color: white;
     width: 100px;
     height: 30px;
     border-radius: 8px;
     font-size: 24px;
+    font-weight: bolder;
 }
 
 .info div{
@@ -64,8 +84,10 @@ form button{
 footer{
     display: flex;
     gap: 7px;
-    font-size: 22px;
-    bottom: 0;
+    font-size: 24px;
+    bottom: 4px;
+    position: fixed;
+    font-family: 'Gideon Roman', cursive;
 }
 
 .fab{
