@@ -76,6 +76,11 @@ form button{
     font-weight: bolder;
 }
 
+form button:hover{
+    transform: scale(1.03);
+    box-shadow: 4px 4px 4px #0f172a;
+}
+
 .info div{
     display: flex;
     flex-direction: column;
@@ -96,6 +101,11 @@ form button{
     border-radius: 8px;
     font-size: 24px;
     font-weight: bolder;
+}
+
+#restart:hover{
+    transform: scale(1.05);
+    box-shadow: 4px 1px 8px #0f172a;
 }
 
 footer{
